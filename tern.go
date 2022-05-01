@@ -8,3 +8,8 @@ func Tern[T any](cond bool, truthy, falsey T) T {
 	}
 	return falsey
 }
+
+// LazyTern implements the ternary operator with the values evaluated lazily.
+func LazyTern[T any](cond bool, truthy, falsey func() T) T {
+	return Tern(cond, truthy, falsey)()
+}
