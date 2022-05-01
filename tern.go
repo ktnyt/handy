@@ -10,6 +10,6 @@ func Tern[T any](cond bool, truthy, falsey T) T {
 }
 
 // LazyTern implements the ternary operator with the values evaluated lazily.
-func LazyTern[T any](cond bool, truthy, falsey func() T) T {
+func LazyTern[T comparable](cond bool, truthy, falsey func() T) T {
 	return Tern(cond, truthy, falsey)()
 }
