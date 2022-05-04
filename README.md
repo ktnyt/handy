@@ -6,6 +6,7 @@ Small but useful Go generic functions.
   - [Pointer initializer](#pointer-initializer)
   - [Slice initializer](#slice-initializer)
   - [Ternary operator](#ternary-operator)
+  - [Unpack error](#unpack-error)
 
 # Showcase
 ## Pointer initializer
@@ -27,4 +28,12 @@ fmt.Println(ss) // [foo bar]
 ```go
 c := handy.Tern(true, "foo", "bar")
 fmt.Println(c) // foo
+```
+
+## Unpack error
+
+```go
+w := iomock.ErrOnCallWriter(1, iomock.ErrWrite)
+err := handy.UnpackError(io.WriteString(w, "foobar"))
+fmt.Println(err) // write error
 ```
