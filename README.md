@@ -7,6 +7,8 @@ Small but useful Go generic functions.
   - [Slice initializer](#slice-initializer)
   - [Ternary operator](#ternary-operator)
   - [Unpack error](#unpack-error)
+  - [Single-line errors.As](#single-line-errorsas)
+    - [error type](#error-type)
 
 # Showcase
 ## Pointer initializer
@@ -36,4 +38,21 @@ fmt.Println(c) // foo
 w := iomock.ErrOnCallWriter(1, iomock.ErrWrite)
 err := handy.UnpackError(io.WriteString(w, "foobar"))
 fmt.Println(err) // write error
+```
+
+## Single-line errors.As
+
+### error type
+
+```go
+type TestError string
+
+func (s TestError) Error() string {
+	return string(s)
+}
+```
+
+```go
+in := fmt.Errorf("wrap: %w", TestError("error"))
+fmt.Println(handy.As[TestError](in)) // error true
 ```

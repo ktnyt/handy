@@ -12,8 +12,6 @@ func As[Error error](err error) (Error, bool) {
 // IsType reports whether or not the type of any error in err's chain matches
 // the Error type.
 func IsType[Error error](err error) bool {
-	if _, ok := As[Error](err); err == nil || ok {
-		return ok
-	}
-	return IsType[Error](errors.Unwrap(err))
+	_, ok := As[Error](err)
+	return ok
 }
